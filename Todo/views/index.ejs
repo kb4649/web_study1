@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Todo</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Todo</h1>
+    <p>
+      <input type='text' id='text' />
+      <input type='submit' id='add' value='追加' />
+    </p>
+    <ul id='list'></ul>
+    <script sorc='javascripts/todo.js'></script>
   </body>
 </html>
