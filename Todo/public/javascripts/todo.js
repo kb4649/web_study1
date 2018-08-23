@@ -2,14 +2,18 @@
 
 document.getElementById('add').onclick =function(){
 	var str0=document.getElementById('text').value; //入力された値
-	if(str0=='')return;
-	console.log('add ('+Items.length+') '+str0);
+	if(str0=='')return;//文字列なし
+	console.log('add '+str0);
+	var xhr=new XMLHttpRequest();
+	xhr.open("POST","/add",true);
+	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	xhr.send('text='+str0);
 //	Items.push(str0);
 	list();
 }
 
 function del(id){
-	if((id<0)||(id>=Items.length)) return;//範囲外
+//	if((id<0)||(id>=Items.length)) return;//範囲外
 	console.log('del ('+id+')');
 //	for(i0=id;i0<(Items.length-1);i0++){
 //		Items[i0]=Items[i0+1];//１つずつ詰める

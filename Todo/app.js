@@ -40,6 +40,27 @@ app.get('/list',function(req,res,next){
 	});
 });
 
+//‚P€–Ú’Ç‰Á‚·‚éAPI
+app.post('/add',function(req,res){
+	var todo0=new Todo();
+	todo0.text=req.body.text; 
+	todo0.save(function(err){
+		if(err){condole.log(err);}
+	});
+	res.send(true);
+});
+
+//‚P€–Úíœ‚·‚éAPI
+app.post('/del',function(req,res){
+	var id=req.body.id;
+	if(id){
+		Todo.remove({'_id':id},function(err){
+			if(err){condole.log(err);}
+		});
+	}
+	res.send(true);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
