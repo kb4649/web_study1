@@ -19,10 +19,14 @@ function del(id){
 }
 
 function list(){
-	var str0='';
+	var str0='<table>'
+	+'<thead><tr><th style="width:80%">　内容　</th><th>削除</th></tr></thead>'
+	+'<tbody>';
 	for(i0=(Items.length-1);i0>=0;i0--){//逆順
-		str0+='<li><input type="submit" onclick="del('+i0
-		+')" value="削除" />'+Items[i0]+'</li>';
-	}
+		str0+='<tr><td>'+Items[i0]+'</td>'
+		+'<td><input type="submit" onclick="del('+i0
+		+')" value="削除" /></td></tr>';
+	}　　
+	　str0+='</tbody></table>';
 	document.getElementById('list').innerHTML=str0;
 }
