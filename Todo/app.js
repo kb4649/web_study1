@@ -22,6 +22,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// MongoDB
+var mongoose =require('mongoose');
+var Schema = mongoose.Schema;
+var TodoSchema = new Schema({
+	text: String
+});
+mongoose.model('todo', TodoSchema);
+mongoose.connect('mongodb://localhost/testdb');
+var Todo=mongoose.model('todo');
+
+//ƒŠƒXƒg‚ðŽæ“¾‚·‚éAPI
+app.get('/list',function(req,res,next){
+	Todo.find({},function(err,docs){
+		res.json(docs);
+			if(err){console.log(err);}
+	});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
