@@ -61,6 +61,19 @@ app.post('/del',function(req,res){
 	res.send(true);
 });
 
+//‚P€–Ú•ÏX‚·‚éAPI
+app.post('/update',function(req,res){
+	var id=req.body.id;
+	var text=req.body.text;
+	if((id)&&(text)){ 
+		Todo.update({'_id':id},{$set:{'text':text}},function(err){
+			if(err){condole.log(err);}
+		});
+	}
+	res.send(true);
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
