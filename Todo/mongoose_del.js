@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 var TodoSchema = new Schema({
-//  point: Number,
+  uid: Number,
   text:  String
 });
 mongoose.model('todo', TodoSchema);

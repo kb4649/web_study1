@@ -26,6 +26,7 @@ app.use('/users', usersRouter);
 var mongoose =require('mongoose');
 var Schema = mongoose.Schema;
 var TodoSchema = new Schema({
+	uid: Number,
 	text: String
 });
 mongoose.model('todo', TodoSchema);
@@ -39,10 +40,17 @@ app.get('/list',function(req,res,next){
 			if(err){console.log(err);}
 	});
 });
-
+app.get('/list/:uid',function(req,res,next){
+	var uid=req.params.uid;
+	Todo.find({'uid':uid},function(err,docs){
+		res.json(docs);
+			if(err){console.log(err);}
+	});
+});
 //ÇPçÄñ⁄í«â¡Ç∑ÇÈAPI
 app.post('/add',function(req,res){
 	var todo0=new Todo();
+	todo0.uid=req.body.uid;
 	todo0.text=req.body.text; 
 	todo0.save(function(err){
 		if(err){condole.log(err);}

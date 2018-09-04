@@ -1,11 +1,12 @@
 document.getElementById('add').onclick =function(){
-	var str0=document.getElementById('text').value; //入力された値
-	if(str0=='')return;//文字列なし
-	console.log('add '+str0);
+	var strtxt=document.getElementById('text').value; //入力された値
+	var struid=document.getElementById('user').value;
+	if((strtxt=='')||(struid==''))return;//文字列なし
+	console.log('add '+strtxt+' '+struid);
 	var xhr=new XMLHttpRequest();
 	xhr.open("POST","/add",true);
 	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-	xhr.send('text='+str0);
+	xhr.send('text='+strtxt+'&uid='+struid);
 	list();
 }
 
@@ -32,8 +33,9 @@ function update(id){
 }
 
 function list(){
+	var struid=document.getElementById('user').value;
 	var xhr=new XMLHttpRequest();
-	xhr.open("GET","/list");
+	xhr.open("GET","/list/"+struid);
 	xhr.addEventListener("load",function(ev){
 		var Items =JSON.parse(xhr.responseText);
 		console.log(Items);
@@ -56,4 +58,22 @@ function list(){
 	xhr.send();
 }
 
-window.onload =list;
+function userlist(){
+    var str0
+	='<option value="">all</option>'
+	+'<option value="101">Mr.X(101)</option>'
+	+'<option value="102">Ms.Y(102)</option>'
+	+'<option value="103">Dr.Z(103)</option>'
+	document.getElementById('user').innerHTML=str0;
+	list();
+}
+
+var olduid="";//all
+document.getElementById('user').onclick =function(){
+	var struid=document.getElementById('user').value;
+	if(struid==olduid) return; // クリックでID変化したときのみ
+	olduid=struid;
+	list();
+}
+
+window.onload =userlist;
