@@ -58,20 +58,20 @@ function list(){
 	xhr.send();
 }
 
+var olduid;
 function userlist(){
     var str0
-	='<option value="">all</option>'
-	+'<option value="101">Mr.X(101)</option>'
+	='<option value="101">Mr.X(101)</option>'
 	+'<option value="102">Ms.Y(102)</option>'
 	+'<option value="103">Dr.Z(103)</option>'
 	document.getElementById('user').innerHTML=str0;
+	olduid="101";//２度表示防止
 	list();
 }
 
-var olduid="";//all
 document.getElementById('user').onclick =function(){
 	var struid=document.getElementById('user').value;
-	if(struid==olduid) return; // クリックでID変化したときのみ
+	if(struid==olduid) return; // ２度表示防止 クリックでID変化したときのみ
 	olduid=struid;
 	list();
 }
