@@ -74,7 +74,7 @@ app.post('/update',function(req,res){
 	var id=req.body.id;
 	var text=req.body.text;
 	if((id)&&(text)){ 
-		Todo.update({'_id':id},{$set:{'text':text}},function(err){
+		Todo.updateOne({'_id':id},{$set:{'text':text}},function(err){
 			if(err){condole.log(err);}
 		});
 	}
